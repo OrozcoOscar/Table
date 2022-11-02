@@ -13,7 +13,7 @@ class Table{
     constructor(dataJson=[],padre="body",option=[],id=true,maxRow=50){
         this.dataJson=dataJson
         this.id=id
-        this.maxRow=dataJson.length>maxRow?maxRow:dataJson.length
+        this.maxRow=this.maxRow=dataJson.length>maxRow?maxRow:dataJson.length
         this.padre=padre
         this.option=option
         this.table=document.createElement("table")
@@ -54,7 +54,7 @@ class Table{
                                 aux+=`<button onclick="${op.onClick}(this,'tr-${i}')">${op.button}</button>`)
 
                                 td.innerHTML+= `<div class="opc-row">
-                                    <i class="fa-solid fa-sliders" onclick="toggle('#opc-button-${i}','active-btn')" ></i>
+                                    <i class="fa-solid fa-sliders" onclick="Table.toggle('#opc-button-${i}','active-btn')" ></i>
                                     <div class="opc-button" id="opc-button-${i}">
                                         ${aux}
                                     </div>
@@ -153,5 +153,10 @@ class Table{
         document.querySelector("#row_table").addEventListener("change",update)
         return contTable
     }
-  
+  static toggle(q, c) {
+    if (typeof q == "string")
+        document.querySelector(q).classList.toggle(c)
+    else
+        q.classList.toggle(c)
+}
 }
