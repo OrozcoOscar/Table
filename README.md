@@ -1,5 +1,5 @@
 # Table
 Crear tablas usando js
 
-##cdn
+## cdn
 https://raw.githack.com/OrozcoOscar/Table/main/table.js
