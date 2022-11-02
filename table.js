@@ -4,18 +4,18 @@
      * @param padre  Contenedor padre donde se insertara la tabla (debe ser un selector).
      * @param id Propiedad para activar la vista del numero de filas.
      * @param maxRow Numero máximo de filas a mostrar inicialmente.
-     * @param opction Configuración de botones Ejem. [{
+     * @param option Configuración de botones Ejem. [{
                 button: "Eliminar",
                 onClick: "eliminar" -> la función recibe 2 valores (el mismo botón,el id de la fila)
             }]
      */
 class Table{
-    constructor(dataJson=[],padre="body",id=true,maxRow=50,opction=[]){
+    constructor(dataJson=[],padre="body",option=[],id=true,maxRow=50){
         this.dataJson=dataJson
         this.id=id
         this.maxRow=maxRow
         this.padre=padre
-        this.opction=opction
+        this.option=option
         this.table=document.createElement("table")
         this.keys
         this.select
@@ -42,28 +42,32 @@ class Table{
         for (let i = inicial; i < final; i++) {
             let row=this.dataJson[i]
             try {
-                let tr=document.createElement("tr")
-                tr.id="tr-"+i
-                this.keys.map((col,e)=>{
-                let td= document.createElement("td")
-                if(e==0 && col=="#")td.innerHTML=i+1 
-                else if(col=="≡"){
-                    let aux=""
-                    this.opction.map(op=>
-                       aux+=`<button onclick="${op.onClick}(this,'tr-${i}')">${op.button}</button>`)
+                if(row){
+                    let tr=document.createElement("tr")
+                    tr.id="tr-"+i
+                    this.keys.map((col,e)=>{
+                    let td= document.createElement("td")
+                    if(e==0 && col=="#")td.innerHTML=i+1 
+                    else if(col=="≡"){
+                        let aux=""
+                        this.option.map(op=>
+                                aux+=`<button onclick="${op.onClick}(this,'tr-${i}')">${op.button}</button>`)
 
-                    td.innerHTML+= `<div class="opc-row">
-                        <i class="fa-solid fa-sliders" onclick="toggle('#opc-button-${i}','active-btn')" ></i>
-                        <div class="opc-button" id="opc-button-${i}">
-                            ${aux}
-                        </div>
-                    </div>`
-                    
+                                td.innerHTML+= `<div class="opc-row">
+                                    <i class="fa-solid fa-sliders" onclick="toggle('#opc-button-${i}','active-btn')" ></i>
+                                    <div class="opc-button" id="opc-button-${i}">
+                                        ${aux}
+                                    </div>
+                                </div>`
+                                
+                    }
+                    else {
+                        td.innerHTML=row[col]||"-----"
+                    }
+                    tr.append(td)
+                    })
+                    this.table.append(tr)
                 }
-                else td.innerHTML=row[col]||"-----"
-                tr.append(td)
-            })
-            this.table.append(tr)
             } catch (error) {
                 console.log(error)
             }
@@ -75,6 +79,7 @@ class Table{
      * @param inicial indica desde donde inicia a pintar la Tabla;esto puede estar vacío.
      * @param final  indica hasta donde pinta la Tabla;esto puede estar vacío.
      */
+
     generate(inicial=0,final=this.maxRow){
         this.keys=(this.id)?["#"]:[]
         document.querySelector(this.padre).innerHTML=""
@@ -98,7 +103,7 @@ class Table{
             th.innerHTML=h
             header.append(th)
         })
-        if(this.opction.length>0){
+        if(this.option.length>0){
             this.keys.push("≡")
             let th= document.createElement("th")
             th.innerHTML="≡"
@@ -107,6 +112,7 @@ class Table{
         this.table.append(header)
         //rellenamos la tabla
         this.fill(inicial,final)
+        
         //guardamos la tabla en un div 
         let contTable=document.createElement("div")
         contTable.innerHTML=`<div class="setting-table">
@@ -116,7 +122,7 @@ class Table{
                                 <span>
                                 Desde:
                                 </span>
-                                <select id="row" onchange=updateTable()>
+                                <select id="row_table">
                                 ${
                                     this.dataJson.map((_,i)=>`<option value=${(i+1)} ${(inicial==i)?'selected="selected"':""}>${(i+1)}</option>`).toString().replace(/,/g,"")
                                 }
@@ -124,9 +130,9 @@ class Table{
                                 <span>
                                 Hasta:
                                 </span>
-                                <select id="nRow" onchange=updateTable()>
+                                <select id="nRow_table">
                                 ${
-                                    this.dataJson.map((_,i)=>`<option value=${(i+1)}  ${(final==i+1)?'selected="selected"':""}>${(i+1)}</option>`).toString().replace(/,/g,"")
+                                    this.dataJson.map((_,i)=>`<option value=${(i+1)}  ${(final==i+1 || (this.dataJson.length-1<final && this.dataJson.length-1==i))?'selected="selected"':""}>${(i+1)}</option>`).toString().replace(/,/g,"")
                                 }
                                 </select>
                             </div>
@@ -138,7 +144,13 @@ class Table{
 
         contTable.append(this.table)
         document.querySelector(this.padre).append(contTable)
-
+        let update=()=>{
+            this.generate(
+                document.querySelector("#row_table").value - 1,
+                document.querySelector("#nRow_table").value)
+    }
+        document.querySelector("#nRow_table").addEventListener("change",update)
+        document.querySelector("#row_table").addEventListener("change",update)
         return contTable
     }
   
