@@ -13,7 +13,7 @@ class Table{
     constructor(dataJson=[],padre="body",option=[],id=true,maxRow=50){
         this.dataJson=dataJson
         this.id=id
-        this.maxRow=dataJson.length>maxRow:maxRow:dataJson.length
+        this.maxRow=dataJson.length>maxRow?maxRow:dataJson.length
         this.padre=padre
         this.option=option
         this.table=document.createElement("table")
