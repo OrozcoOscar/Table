@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="table.js"></script>
+    <script>
+        let json=[{
+            name:"oscar",
+            lasname:"Orozco"
+        },{
+            name:"David"
+        }]
+
+        let tabla=new Table(json,undefined,option=[{
+                button: "Eliminar",
+                onClick: "eliminar"
+            }])
+        tabla.generate()
+        function eliminar(b,id){
+            document.querySelector("#" + id).remove()
+        }
+    </script>
+</body>
+</html>
