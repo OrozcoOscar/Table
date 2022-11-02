@@ -1,0 +1,100 @@
+:root{
+
+    --c1:#F2F2F2;
+    --c2:#6b7177;
+    --c3:#212326;
+    --c5:#002e25;
+    --c4: #008060;
+}
+
+.setting-table{
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+    background: var(--c4);
+    color: var(--c1);
+}
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+table tr{
+    background-color:var(--c1);
+    color: var(--c5);
+}
+table td,table th{
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--c2);
+    color: var(--c1);
+  }
+table tr:nth-child(even){
+    background-color:var(--c3);
+    color: var(--c1);
+}
+
+table tr:hover {
+    background-color:var(--c5);
+    color: var(--c1);
+}
+
+.search .tags{
+    display: flex;
+    flex-flow: row wrap;
+}
+.tag:hover{
+    background-color: var(--c3);
+    color:var(--c1)
+}
+.tag{
+    padding: 5px 10px;
+    background: #d3d3f5;
+    margin: 5px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.tag.active:hover{
+
+    background: #d3d3f5;
+    color: var(--c5);
+}
+.tag.active{
+    background-color: var(--c3);
+    color:var(--c1)
+}
+.active-btn{
+    display: flex !important;
+}
+
+.opc-row i{
+    cursor: pointer;
+}
+.opc-row .opc-button{
+    border: solid 1px;
+    background-color: white;
+    box-shadow: 1px 1px 4px 0px var(--c5);
+    display: none;
+    flex-direction: column;
+    width: min-content;
+    padding: 0.5rem;
+    position: absolute;
+    background: var(--c1);
+    right:1%;
+}
+.opc-row .opc-button button {
+    margin: 2px;
+    padding: 5px;
+    background: var(--c2);
+    border: none;
+    color: var(--c1);
+    border-radius: 2px;
+    cursor: pointer;
+}
+.opc-row .opc-button button:hover{
+    background: var(--c4);
+}
