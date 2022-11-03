@@ -20,7 +20,8 @@ https://raw.githack.com/OrozcoOscar/Table/main/table.css
             name:"oscar",
             lasname:"Orozco"
         },{
-            name:"David"
+            name:"Ana",
+            lasbane:"Sofia"
         }]
 
         let tabla=new Table(json,"body",option=[{
