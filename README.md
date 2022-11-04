@@ -35,3 +35,7 @@ https://raw.githack.com/OrozcoOscar/Table/main/table.css
  </script>
    
 ```
+
+# Demo
+
+https://orozcooscar.github.io/Table/
