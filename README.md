@@ -7,7 +7,7 @@ https://raw.githack.com/OrozcoOscar/Table/main/table.js
 
 https://raw.githack.com/OrozcoOscar/Table/main/table.css
 
-
+# Instalación 
 ```html
 <link rel="stylesheet" href="https://raw.githack.com/OrozcoOscar/Table/main/table.css">
 <script src="https://kit.fontawesome.com/b5be18ffec.js" crossorigin="anonymous"></script>
